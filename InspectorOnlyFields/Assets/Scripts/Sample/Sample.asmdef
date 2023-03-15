@@ -1,5 +1,5 @@
 {
-    "name": "Scripts",
+    "name": "Sample",
     "rootNamespace": "",
     "references": [
         "InspectorOnlyFields.Editor"

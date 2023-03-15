@@ -90,7 +90,7 @@
       },
       "url": "https://packages.unity.com"
     },
-    "org.yu195.inspector-only-fields": {
+    "yu195.inspector-only-fields": {
       "version": "file:InspectorOnlyFields",
       "depth": 0,
       "source": "embedded",
