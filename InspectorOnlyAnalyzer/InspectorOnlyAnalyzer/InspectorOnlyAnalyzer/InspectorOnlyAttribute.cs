@@ -3,7 +3,8 @@
     partial class InspectorOnlyAttributesGenerator
     {
         private const string _ioaSource =
-@"#pragma warning disable IDE0005
+@"#pragma warning disable IDE0079
+#pragma warning disable IDE0005
 using System;
 
 namespace InspectorOnlyFields
@@ -14,7 +15,8 @@ namespace InspectorOnlyFields
 ";
 
         private const string _ignoreSource =
-@"#pragma warning disable IDE0005
+@"#pragma warning disable IDE0079
+#pragma warning disable IDE0005
 using System;
 
 namespace InspectorOnlyFields

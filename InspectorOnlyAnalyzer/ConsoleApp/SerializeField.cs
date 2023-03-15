@@ -1,7 +1,7 @@
 ﻿namespace UnityEngine
 {
     [AttributeUsage(AttributeTargets.Field)]
-    internal class SerializeFieldAttribute : Attribute
+    public class SerializeField : Attribute
     {
     }
 }

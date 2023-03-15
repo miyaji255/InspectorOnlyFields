@@ -116,7 +116,7 @@ namespace InspectorOnlyAnalyzer
                 return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray));
             else
                 return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray))
-                    && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeFieldAttribute"));
+                    && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeField"));
         }
 
         private bool VerifySymbolFullName(INamespaceOrTypeSymbol symbol, params string[] names) {
@@ -144,7 +144,7 @@ namespace InspectorOnlyAnalyzer
                 return;
             }
 
-            var serializeFieldAttribute = new string[] { "UnityEngine", "SerializeFieldAttribute" };
+            var serializeFieldAttribute = new string[] { "UnityEngine", "SerializeField" };
             var nonSerializedAttribute = new string[] { "System", "NonSerializedAttribute" };
 
             var hasInspectorOnly = false;
