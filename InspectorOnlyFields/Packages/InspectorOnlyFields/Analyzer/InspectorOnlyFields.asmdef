@@ -1,9 +1,7 @@
 {
-    "name": "Sample",
+    "name": "InspectorOnlyFields",
     "rootNamespace": "",
-    "references": [
-        "InspectorOnlyFields"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
