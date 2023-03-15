@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InspectorUtilAnalyzer": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "../../ConsoleApp/ConsoleApp.csproj"
+    }
+  }
+}
