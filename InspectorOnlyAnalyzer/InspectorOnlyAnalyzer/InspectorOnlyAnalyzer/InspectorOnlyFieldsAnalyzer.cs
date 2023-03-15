@@ -119,14 +119,14 @@ namespace InspectorOnlyAnalyzer
                     && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeField"));
         }
 
-        private bool VerifySymbolFullName(INamespaceOrTypeSymbol symbol, params string[] names) {
+        private bool VerifySymbolFullName(INamespaceOrTypeSymbol? symbol, params string[] names) {
             for (var i = names.Length - 1; i >= 0; i--) {
-                if (names[i] != symbol.Name)
+                if (names[i] != symbol?.Name)
                     return false;
 
                 symbol = symbol.ContainingNamespace;
             }
-            return symbol.Name == "";
+            return symbol?.Name == "";
         }
         #endregion
 
