@@ -9,5 +9,5 @@ Unityでシリアライズしたフィールドにコードから書き換えよ
 1. Package Manager ウィンドウを開く
 2. ステータスバーの **Add**(+) をクリック
 3. **Add package from git URL** を選択
-4. `https://github.com/yu195/InspectorOnlyFields.git?path=InspectorOnlyFields/Packages/InspectorOnlyFields` を入力
+4. `https://github.com/miyaji255/InspectorOnlyFields.git?path=InspectorOnlyFields/Packages/InspectorOnlyFields` を入力
 5. **Add** をクリック
