@@ -37,4 +37,4 @@ public class SampleObject : MonoBehaviour
 }
 ```
 
-Translated by DeepL.com
+Translated by [DeepL.com](https://www.deepl.com/)
