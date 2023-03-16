@@ -1,20 +1,23 @@
 # InspectorOnlyFields
 
-Unityでシリアライズしたフィールドにコードから書き換えようとすると警告するパッケージです
+[:ja:](README_ja.md)
 
-## インストール方法
+This package provides an analyzer that warns against assigning on C# code to fields that are assigned from within the Unity inspector.
 
-このパッケージは UPM(Unity Package Manager) を利用してインストールすることができます。
+## installation
 
-1. Package Manager ウィンドウを開く
-2. ステータスバーの **Add**(+) をクリック
-3. **Add package from git URL** を選択
-4. `https://github.com/miyaji255/InspectorOnlyFields.git?path=InspectorOnlyFields/Packages/InspectorOnlyFields` を入力
-5. **Add** をクリック
+You can install this package using UPM (Unity Package Manager).
 
-## 使い方
+1. Open **Package Manager** Window
+2. Click **Add**(+) on the status bar
+3. Select **Add package from git URL**
+4. Input `https://github.com/miyaji255/InspectorOnlyFields.git?path=InspectorOnlyFields/Packages/InspectorOnlyFields`
+5. Click **Add**
 
-インスペクターから値を渡すフィールドに`InspectorOnly`属性をつけます。すると、代入時に警告が出されるようになります。
+## Usage
+
+Add the `InspectorOnly` attribute to fields to which you want to assign values from the inspector. Then, The analyzer will warn you when assigning a value to the fields.
+
 ```csharp
 using InspectorOnlyFields;
 using UnityEngine;
@@ -22,14 +25,16 @@ using UnityEngine;
 public class SampleObject : MonoBehaviour
 {
     
-    // IO001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+    // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
     [InspectorOnly]
     public GameObject GameObject = new GameObject();
 
     void Start()
     {
-        // IO001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+        // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
         GameObject = new GameObject();
     }
 }
 ```
+
+Translated by DeepL.com
