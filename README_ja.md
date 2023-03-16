@@ -1,6 +1,6 @@
 # InspectorOnlyFields
 
-[:us:](README.md)
+[English](README.md) / Japanese
 
 このパッケージはUnityのインスペクター上から代入するフィールドに、C#コード上で代入することを警告するアナライザーを提供します。
 
