@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InspectorOnlyAnalyzer\InspectorOnlyAnalyzer\InspectorOnlyAnalyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\LibraryInUnity\LibraryInUnity.csproj" />
   </ItemGroup>
 
 </Project>
