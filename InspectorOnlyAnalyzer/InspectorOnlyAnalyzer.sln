@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InspectorOnlyAnalyzer.Test"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{C7DB4DC2-C699-4B36-B522-CE6F312F4E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryInUnity", "LibraryInUnity\LibraryInUnity.csproj", "{B4E98930-B448-4B23-BEC3-767E6D758F33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryInUnity", "LibraryInUnity\LibraryInUnity.csproj", "{B4E98930-B448-4B23-BEC3-767E6D758F33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{149B6075-32E2-4243-8907-FF530444CED4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

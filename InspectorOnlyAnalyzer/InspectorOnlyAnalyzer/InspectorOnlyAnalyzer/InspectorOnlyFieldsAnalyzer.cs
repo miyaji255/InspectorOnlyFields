@@ -12,7 +12,7 @@ namespace InspectorOnlyAnalyzer
     public class InspectorOnlyFieldsAnalyzer : DiagnosticAnalyzer
     {
         private static readonly DiagnosticDescriptor _referenceRule = new DiagnosticDescriptor(
-                id: "IO001",
+                id: "IOF001",
                 title: "a",
                 messageFormat: "'{0}' へ代入することは InspectorOnly 属性により禁止されています",
                 category: "InspectorUtilAnalyzerCorrectness",
@@ -21,7 +21,7 @@ namespace InspectorOnlyAnalyzer
             );
 
         private static readonly DiagnosticDescriptor _declareRule = new DiagnosticDescriptor(
-                id: "IO002",
+                id: "IOF002",
                 title: "a",
                 messageFormat: "InspectorOnly 属性はシリアライズ可能なフィールドに付与する必要があります",
                 category: "InspectorUtilAnalyzerCorrectness",
@@ -30,7 +30,7 @@ namespace InspectorOnlyAnalyzer
             );
 
         private static readonly DiagnosticDescriptor _declareWithoutNonSerializedRule = new DiagnosticDescriptor(
-                id: "IO003",
+                id: "IOF003",
                 title: "a",
                 messageFormat: "InspectorOnly 属性は NonSerialized 属性と同時に使用することができません",
                 category: "InspectorUtilAnalyzerCorrectness",
@@ -44,7 +44,8 @@ namespace InspectorOnlyAnalyzer
                 _declareWithoutNonSerializedRule
             );
 
-        public override void Initialize(AnalysisContext context) {
+        public override void Initialize(AnalysisContext context)
+        {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
 
@@ -54,26 +55,34 @@ namespace InspectorOnlyAnalyzer
         }
 
         #region assignment
-        private void AnalyzeSymbol(OperationAnalysisContext context) {
+        private void AnalyzeSymbol(OperationAnalysisContext context)
+        {
             context.CancellationToken.ThrowIfCancellationRequested();
 
-            if (context.Operation.Kind == OperationKind.FieldReference) {
+            if (context.Operation.Kind == OperationKind.FieldReference)
+            {
                 if (!(context.Operation is IFieldReferenceOperation fieldReference)
                     || !VerifyFieldReference(fieldReference.Field))
                     return;
-            } else if (context.Operation.Kind == OperationKind.PropertyReference) {
+            }
+            else if (context.Operation.Kind == OperationKind.PropertyReference)
+            {
                 if (!(context.Operation is IPropertyReferenceOperation propertyReference)
                     || !TryGetAutoPropertyField(propertyReference.Property, out var field)
                     || !VerifyFieldReference(field))
                     return;
-            } else if (context.Operation.Kind == OperationKind.FieldInitializer) {
+            }
+            else if (context.Operation.Kind == OperationKind.FieldInitializer)
+            {
                 if (!(context.Operation is IFieldInitializerOperation fieldInitializer)
                     || !VerifyFieldReference(fieldInitializer.InitializedFields[0]))
                     return;
 
                 var diagnostic = Diagnostic.Create(_referenceRule, context.Operation.Syntax.GetLocation(), fieldInitializer.InitializedFields[0].ToDisplayParts().LastOrDefault().ToString());
                 context.ReportDiagnostic(diagnostic);
-            } else if (context.Operation.Kind == OperationKind.PropertyInitializer) {
+            }
+            else if (context.Operation.Kind == OperationKind.PropertyInitializer)
+            {
                 if (!(context.Operation is IPropertyInitializerOperation propertyInitializer)
                     || !TryGetAutoPropertyField(propertyInitializer.InitializedProperties[0], out var field)
                     || !VerifyFieldReference(field))
@@ -84,14 +93,16 @@ namespace InspectorOnlyAnalyzer
             }
 
             if (context.Operation.Parent is IAssignmentOperation assignmentOperation && assignmentOperation.Target.Syntax.Span == context.Operation.Syntax.Span
-             || context.Operation.Parent is ITupleOperation tupleOperation && VerifyTuple(tupleOperation)) {
+             || context.Operation.Parent is ITupleOperation tupleOperation && VerifyTuple(tupleOperation))
+            {
                 var memberReference = (IMemberReferenceOperation)context.Operation;
                 var diagnostic = Diagnostic.Create(_referenceRule, context.Operation.Syntax.GetLocation(), memberReference.Member.ToDisplayParts().LastOrDefault().ToString());
                 context.ReportDiagnostic(diagnostic);
             }
         }
 
-        private bool TryGetAutoPropertyField(IPropertySymbol property, out IFieldSymbol field) {
+        private bool TryGetAutoPropertyField(IPropertySymbol property, out IFieldSymbol field)
+        {
             field = property.ContainingType.GetMembers()
                 .OfType<IFieldSymbol>()
                 .FirstOrDefault(f => SymbolEqualityComparer.Default.Equals(f.AssociatedSymbol, property));
@@ -99,8 +110,10 @@ namespace InspectorOnlyAnalyzer
             return field != null;
         }
 
-        private bool VerifyTuple(ITupleOperation tupleOperation) {
-            switch (tupleOperation.Parent) {
+        private bool VerifyTuple(ITupleOperation tupleOperation)
+        {
+            switch (tupleOperation.Parent)
+            {
                 case IAssignmentOperation assignmentOperation:
                     return tupleOperation.Syntax.Span == assignmentOperation.Target.Syntax.Span;
                 case ITupleOperation parent:
@@ -110,7 +123,8 @@ namespace InspectorOnlyAnalyzer
             }
         }
 
-        private bool VerifyFieldReference(IFieldSymbol fieldSymbol) {
+        private bool VerifyFieldReference(IFieldSymbol fieldSymbol)
+        {
             // public で定義されているとき
             if (fieldSymbol.DeclaredAccessibility == Accessibility.Public)
                 return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray));
@@ -119,8 +133,10 @@ namespace InspectorOnlyAnalyzer
                     && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeField"));
         }
 
-        private bool VerifySymbolFullName(INamespaceOrTypeSymbol? symbol, params string[] names) {
-            for (var i = names.Length - 1; i >= 0; i--) {
+        private bool VerifySymbolFullName(INamespaceOrTypeSymbol? symbol, params string[] names)
+        {
+            for (var i = names.Length - 1; i >= 0; i--)
+            {
                 if (names[i] != symbol?.Name)
                     return false;
 
@@ -131,16 +147,22 @@ namespace InspectorOnlyAnalyzer
         #endregion
 
         #region declare
-        private void AnalyzeDeclare(SymbolAnalysisContext context) {
+        private void AnalyzeDeclare(SymbolAnalysisContext context)
+        {
             context.CancellationToken.ThrowIfCancellationRequested();
 
             IFieldSymbol fieldSymbol;
-            if (context.Symbol.Kind == SymbolKind.Property) {
+            if (context.Symbol.Kind == SymbolKind.Property)
+            {
                 if (!TryGetAutoPropertyField((IPropertySymbol)context.Symbol, out fieldSymbol))
                     return;
-            } else if (context.Symbol.Kind == SymbolKind.Field) {
+            }
+            else if (context.Symbol.Kind == SymbolKind.Field)
+            {
                 fieldSymbol = (IFieldSymbol)context.Symbol;
-            } else {
+            }
+            else
+            {
                 return;
             }
 
@@ -150,7 +172,8 @@ namespace InspectorOnlyAnalyzer
             var hasInspectorOnly = false;
             var hasSerializeField = false;
             var hasNonSerialized = false;
-            foreach (var attribute in fieldSymbol.GetAttributes()) {
+            foreach (var attribute in fieldSymbol.GetAttributes())
+            {
                 if (!hasInspectorOnly && VerifySymbolFullName(attribute.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray))
                     hasInspectorOnly = true;
                 if (!hasSerializeField && VerifySymbolFullName(attribute.AttributeClass, serializeFieldAttribute))
@@ -162,12 +185,14 @@ namespace InspectorOnlyAnalyzer
             if (!hasInspectorOnly)
                 return;
 
-            if (hasNonSerialized) {
+            if (hasNonSerialized)
+            {
                 var diagnostic = Diagnostic.Create(_declareWithoutNonSerializedRule, context.Symbol.Locations[0]);
                 context.ReportDiagnostic(diagnostic);
             }
 
-            if (fieldSymbol.DeclaredAccessibility != Accessibility.Public && !hasSerializeField) {
+            if (fieldSymbol.DeclaredAccessibility != Accessibility.Public && !hasSerializeField)
+            {
                 var diagnostic = Diagnostic.Create(_declareRule, context.Symbol.Locations[0]);
                 context.ReportDiagnostic(diagnostic);
             }

@@ -33,7 +33,8 @@ namespace ConsoleApp
         [field: InspectorOnly]
         private int BadProperty3 { get; set; }
 
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             var p = new Program();
 
             // bad example
