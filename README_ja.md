@@ -1,5 +1,7 @@
 # InspectorOnlyFields
 
+[![openupm](https://img.shields.io/npm/v/com.github.miyaji255.inspector-only-fields?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.github.miyaji255.inspector-only-fields/)
+
 [English](README.md) / Japanese
 
 このパッケージはUnityのインスペクター上から代入するフィールドに、C#コード上で代入することを警告するアナライザーを提供します。
@@ -8,11 +10,18 @@
 
 このパッケージは UPM(Unity Package Manager) を利用してインストールすることができます。
 
+### Git URL を使用する方法
+
 1. **Package Manager** ウィンドウを開く
 2. ステータスバーの **Add**(+) をクリック
 3. **Add package from git URL** を選択
 4. `https://github.com/miyaji255/InspectorOnlyFields.git?path=InspectorOnlyFields/Packages/InspectorOnlyFields` を入力
 5. **Add** をクリック
+
+### OpenUPM を使用する方法
+
+こちらのページからインストールすることができます
+https://openupm.com/packages/com.github.miyaji255.inspector-only-fields/
 
 ## 使い方
 
