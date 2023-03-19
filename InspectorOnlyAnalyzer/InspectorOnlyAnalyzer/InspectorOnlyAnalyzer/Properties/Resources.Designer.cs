@@ -61,7 +61,7 @@ namespace InspectorOnlyAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   The assignment to &apos;{0}&apos; are prohibited by the InspectorOnly attribute に類似しているローカライズされた文字列を検索します。
+        ///   The assignment to &apos;{0}&apos; is prohibited by the InspectorOnly attribute に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MessageFormat001 {
             get {

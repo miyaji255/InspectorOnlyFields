@@ -33,13 +33,13 @@ using UnityEngine;
 public class SampleObject : MonoBehaviour
 {
     
-    // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+    // InspOnly001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
     [InspectorOnly]
     public GameObject GameObject = new GameObject();
 
     void Start()
     {
-        // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+        // InspOnly001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
         GameObject = new GameObject();
     }
 }

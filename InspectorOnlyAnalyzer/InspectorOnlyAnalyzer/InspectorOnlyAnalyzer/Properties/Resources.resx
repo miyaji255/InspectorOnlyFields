@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MessageFormat001" xml:space="preserve">
-    <value>The assignment to '{0}' are prohibited by the InspectorOnly attribute</value>
+    <value>The assignment to '{0}' is prohibited by the InspectorOnly attribute</value>
   </data>
   <data name="MessageFormat002" xml:space="preserve">
     <value>The InspectorOnly attribute must be assigned to a serializable field</value>

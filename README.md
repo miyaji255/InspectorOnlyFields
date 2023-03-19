@@ -33,13 +33,13 @@ using UnityEngine;
 public class SampleObject : MonoBehaviour
 {
     
-    // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+    // InspOnly001: The assignment to 'GameObject' is prohibited by the InspectorOnly attribute
     [InspectorOnly]
     public GameObject GameObject = new GameObject();
 
     void Start()
     {
-        // IOF001: 'GameObject' へ代入することは InspectorOnly 属性により禁止されています
+        // InspOnly: The assignment to 'GameObject' is prohibited by the InspectorOnly attribute
         GameObject = new GameObject();
     }
 }
