@@ -203,12 +203,12 @@ namespace InspectorOnlyAnalyzer.Test
 
                 """,
                 new DiagnosticData[] {
-                    new("IOF001", DiagnosticSeverity.Warning, (7, 22, 25)),
-                    new("IOF001", DiagnosticSeverity.Warning, (11, 23, 26)),
-                    new("IOF001", DiagnosticSeverity.Warning, (15, 8, 14)),
-                    new("IOF001", DiagnosticSeverity.Warning, (16, 8, 14)),
-                    new("IOF001", DiagnosticSeverity.Warning, (18, 9, 15)),
-                    new("IOF001", DiagnosticSeverity.Warning, (18, 18, 24)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (7, 22, 25)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (11, 23, 26)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (15, 8, 14)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (16, 8, 14)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (18, 9, 15)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (18, 18, 24)),
                 }),
                 // Field の宣言が間違えているとき
                 ("""
@@ -233,9 +233,9 @@ namespace InspectorOnlyAnalyzer.Test
 
                 """,
                 new DiagnosticData[] {
-                    new("IOF003", DiagnosticSeverity.Warning, (8, 15, 21)),
-                    new("IOF002", DiagnosticSeverity.Warning, (11, 16, 22)),
-                    new("IOF003", DiagnosticSeverity.Warning, (16, 16, 22)),
+                    new("InspOnly003", DiagnosticSeverity.Warning, (8, 15, 21)),
+                    new("InspOnly002", DiagnosticSeverity.Warning, (11, 16, 22)),
+                    new("InspOnly003", DiagnosticSeverity.Warning, (16, 16, 22)),
                 }),
                 // Property に代入するとき
                 ("""
@@ -264,12 +264,12 @@ namespace InspectorOnlyAnalyzer.Test
 
                 """,
                 new DiagnosticData[] {
-                    new("IOF001", DiagnosticSeverity.Warning, (8, 36, 39)),
-                    new("IOF001", DiagnosticSeverity.Warning, (12, 37, 40)),
-                    new("IOF001", DiagnosticSeverity.Warning, (16, 8, 14)),
-                    new("IOF001", DiagnosticSeverity.Warning, (17, 8, 14)),
-                    new("IOF001", DiagnosticSeverity.Warning, (19, 9, 15)),
-                    new("IOF001", DiagnosticSeverity.Warning, (19, 18, 24)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (8, 36, 39)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (12, 37, 40)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (16, 8, 14)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (17, 8, 14)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (19, 9, 15)),
+                    new("InspOnly001", DiagnosticSeverity.Warning, (19, 18, 24)),
                 }),
                 // Property の宣言が間違えているとき
                 ("""
@@ -294,10 +294,10 @@ namespace InspectorOnlyAnalyzer.Test
 
                 """,
                 new DiagnosticData[] {
-                    new("IOF002", DiagnosticSeverity.Warning, (8, 15, 21)),
-                    new("IOF003", DiagnosticSeverity.Warning, (8, 15, 21)),
-                    new("IOF002", DiagnosticSeverity.Warning, (11, 16, 22)),
-                    new("IOF003", DiagnosticSeverity.Warning, (16, 16, 22)),
+                    new("InspOnly002", DiagnosticSeverity.Warning, (8, 15, 21)),
+                    new("InspOnly003", DiagnosticSeverity.Warning, (8, 15, 21)),
+                    new("InspOnly002", DiagnosticSeverity.Warning, (11, 16, 22)),
+                    new("InspOnly003", DiagnosticSeverity.Warning, (16, 16, 22)),
                 }),
             };
             #endregion

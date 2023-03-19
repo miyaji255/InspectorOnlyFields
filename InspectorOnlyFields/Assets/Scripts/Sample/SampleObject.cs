@@ -1,4 +1,4 @@
-using InspectorOnlyFields;
+﻿using InspectorOnlyFields;
 using UnityEngine;
 
 namespace Sample
@@ -19,3 +19,4 @@ namespace Sample
         }
     }
 }
+

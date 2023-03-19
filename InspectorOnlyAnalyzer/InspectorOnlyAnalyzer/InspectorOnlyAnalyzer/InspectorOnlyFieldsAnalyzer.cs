@@ -1,7 +1,7 @@
 ﻿#pragma warning disable RS2008 // アナライザー リリース追跡を有効にする
 using System.Collections.Immutable;
 using System.Linq;
-using System.Reflection.Metadata;
+using InspectorOnlyAnalyzer.Properties;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
@@ -11,28 +11,28 @@ namespace InspectorOnlyAnalyzer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class InspectorOnlyFieldsAnalyzer : DiagnosticAnalyzer
     {
-        private static readonly DiagnosticDescriptor _referenceRule = new DiagnosticDescriptor(
-                id: "IOF001",
+        private static readonly DiagnosticDescriptor _referenceRule = new(
+                id: "InspOnly001",
                 title: "a",
-                messageFormat: "'{0}' へ代入することは InspectorOnly 属性により禁止されています",
+                messageFormat: new LocalizableResourceString(nameof(Resources.MessageFormat001), Resources.ResourceManager, typeof(Resources)),
                 category: "InspectorUtilAnalyzerCorrectness",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true
             );
 
-        private static readonly DiagnosticDescriptor _declareRule = new DiagnosticDescriptor(
-                id: "IOF002",
+        private static readonly DiagnosticDescriptor _declareRule = new(
+                id: "InspOnly002",
                 title: "a",
-                messageFormat: "InspectorOnly 属性はシリアライズ可能なフィールドに付与する必要があります",
+                messageFormat: new LocalizableResourceString(nameof(Resources.MessageFormat002), Resources.ResourceManager, typeof(Resources)),
                 category: "InspectorUtilAnalyzerCorrectness",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true
             );
 
-        private static readonly DiagnosticDescriptor _declareWithoutNonSerializedRule = new DiagnosticDescriptor(
-                id: "IOF003",
+        private static readonly DiagnosticDescriptor _declareWithoutNonSerializedRule = new(
+                id: "InspOnly003",
                 title: "a",
-                messageFormat: "InspectorOnly 属性は NonSerialized 属性と同時に使用することができません",
+                messageFormat: new LocalizableResourceString(nameof(Resources.MessageFormat003), Resources.ResourceManager, typeof(Resources)),
                 category: "InspectorUtilAnalyzerCorrectness",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true

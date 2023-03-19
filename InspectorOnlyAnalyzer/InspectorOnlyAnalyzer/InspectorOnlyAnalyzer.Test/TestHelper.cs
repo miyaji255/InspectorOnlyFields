@@ -38,7 +38,7 @@ namespace InspectorOnlyAnalyzer.Test
         }
 
         public static IEnumerable<Diagnostic> ValidDiagnostics(this IEnumerable<Diagnostic> diagnostics)
-            => diagnostics.Where(d => d.Id.StartsWith("IOF") || d.DefaultSeverity == DiagnosticSeverity.Error);
+            => diagnostics.Where(d => d.Id.StartsWith("InspOnly") || d.DefaultSeverity == DiagnosticSeverity.Error);
     }
 
     public record class DiagnosticData(string Id, string? Message, DiagnosticSeverity Severity, LinePosition StartPosition, LinePosition EndPosition)
