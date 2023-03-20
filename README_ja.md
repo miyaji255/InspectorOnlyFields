@@ -1,6 +1,6 @@
 # InspectorOnlyFields
 
-[![openupm](https://img.shields.io/npm/v/com.github.miyaji255.inspector-only-fields?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.github.miyaji255.inspector-only-fields/) [![CI](https://github.com/miyaji255/InspectorOnlyFields/actions/workflows/analyzer-ci.yml/badge.svg)](https://github.com/miyaji255/InspectorOnlyFields/actions/workflows/analyzer-ci.yml)
+[![openupm](https://img.shields.io/npm/v/com.github.miyaji255.inspector-only-fields?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.github.miyaji255.inspector-only-fields/) [![CI](https://github.com/miyaji255/InspectorOnlyFields/actions/workflows/analyzer-ci.yml/badge.svg?branch=main)](https://github.com/miyaji255/InspectorOnlyFields/actions/workflows/analyzer-ci.yml)
 
 
 [English](README.md) / Japanese
