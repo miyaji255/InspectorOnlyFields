@@ -1,0 +1,28 @@
+name: dotnet package
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build Analyzer
+        run: MSBuild.exe InspectorOnlyAnalyzer/InspectorOnlyAnalyzer/InspectorOnlyAnalyzer/InspectorOnlyAnalyzer.csproj /t:Rebuild /p:Configuration=Release
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET7 SDK 
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build ConsoleApp
+        run: dotnet build InspectorOnlyAnalyzer/ConsoleApp/ConsoleApp.csproj --configuration Release --no-restore
+      - name: Test 
+        run: dotnet test InspectorOnlyAnalyzer/InspectorOnlyAnalyzer/InspectorOnlyAnalyzer.Test/InspectorOnlyAnalyzer.Test.csproj --no-restore --verbosity normal
