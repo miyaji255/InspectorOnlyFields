@@ -2,7 +2,7 @@
   "name": "com.github.miyaji255.inspector-only-fields",
   "displayName": "InspectorOnlyFields",
   "description": "Provides an analyzer that warns against assigning on C# code to fields that are assigned from within the Unity inspector.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "unity": "2021.3",
   "keywords": [
