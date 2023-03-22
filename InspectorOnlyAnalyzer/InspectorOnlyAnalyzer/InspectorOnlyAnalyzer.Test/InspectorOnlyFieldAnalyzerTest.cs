@@ -79,7 +79,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [InspectorOnly]
                     public int Field1;
@@ -101,7 +101,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     public int Field1 = 1;
 
@@ -125,7 +125,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [field: SerializeField]
                     [field: InspectorOnly]
@@ -148,7 +148,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [field: SerializeField]
                     public int Field1 { get; set; } = 1;
@@ -183,7 +183,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [InspectorOnly]
                     public int Field1 = 1;
@@ -216,7 +216,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [NonSerialized]
                     [InspectorOnly]
@@ -243,7 +243,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [field: SerializeField]
                     [field: InspectorOnly]
@@ -277,7 +277,7 @@ namespace InspectorOnlyAnalyzer.Test
                 using InspectorOnlyFields;
                 using UnityEngine;
                 
-                public class Foo
+                public class Foo : MonoBehaviour
                 {
                     [field: NonSerialized]
                     [field: InspectorOnly]

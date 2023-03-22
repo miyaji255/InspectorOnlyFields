@@ -126,4 +126,7 @@
   <data name="MessageFormat003" xml:space="preserve">
     <value>InspectorOnly attribute cannot be used with NonSerialized attribute</value>
   </data>
+  <data name="MessageFormat004" xml:space="preserve">
+    <value>The InspectorOnly attribute must be assigned to fields of serializable class or struct</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ConsoleApp
 {
+    [Serializable]
     internal class Program
     {
         public int NormalField = 0;

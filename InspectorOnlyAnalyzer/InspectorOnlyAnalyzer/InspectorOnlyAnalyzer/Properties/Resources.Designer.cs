@@ -86,5 +86,14 @@ namespace InspectorOnlyAnalyzer.Properties {
                 return ResourceManager.GetString("MessageFormat003", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   The InspectorOnly attribute must be assigned to fields of serializable class or struct に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MessageFormat004 {
+            get {
+                return ResourceManager.GetString("MessageFormat004", resourceCulture);
+            }
+        }
     }
 }

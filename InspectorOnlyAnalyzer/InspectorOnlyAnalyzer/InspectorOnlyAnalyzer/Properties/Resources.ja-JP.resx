@@ -126,4 +126,7 @@
   <data name="MessageFormat003" xml:space="preserve">
     <value>InspectorOnly 属性は NonSerialized 属性と同時に使用することができません</value>
   </data>
+  <data name="MessageFormat004" xml:space="preserve">
+    <value>InspectorOnly 属性はシリアライズ可能なクラスまたは構造体に付与する必要があります</value>
+  </data>
 </root>

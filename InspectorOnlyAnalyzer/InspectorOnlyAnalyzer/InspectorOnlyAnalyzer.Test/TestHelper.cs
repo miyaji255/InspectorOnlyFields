@@ -34,7 +34,14 @@ namespace InspectorOnlyAnalyzer.Test
                 }
 
                 """;
-            return string.Concat(source, inspectorOnly, serializeField);
+            const string monoBehaviour = """
+                namespace UnityEngine
+                {
+                    public class Object { }
+                    public class MonoBehaviour : Object { }
+                }
+                """;
+            return string.Concat(source, inspectorOnly, serializeField, monoBehaviour);
         }
 
         public static IEnumerable<Diagnostic> ValidDiagnostics(this IEnumerable<Diagnostic> diagnostics)

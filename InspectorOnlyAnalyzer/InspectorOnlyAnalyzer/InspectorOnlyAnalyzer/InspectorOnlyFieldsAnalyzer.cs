@@ -38,10 +38,20 @@ namespace InspectorOnlyAnalyzer
                 isEnabledByDefault: true
             );
 
+        private static readonly DiagnosticDescriptor _containingTypeRule = new(
+                id: "InspOnly004",
+                title: "a",
+                messageFormat: new LocalizableResourceString(nameof(Resources.MessageFormat004), Resources.ResourceManager, typeof(Resources)),
+                category: "InspectorUtilAnalyzerCorrectness",
+                defaultSeverity: DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
                 _referenceRule,
                 _declareRule,
-                _declareWithoutNonSerializedRule
+                _declareWithoutNonSerializedRule,
+                _containingTypeRule
             );
 
         public override void Initialize(AnalysisContext context)
@@ -127,10 +137,12 @@ namespace InspectorOnlyAnalyzer
         {
             // public で定義されているとき
             if (fieldSymbol.DeclaredAccessibility == Accessibility.Public)
-                return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray));
+                return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray))
+                    && VerifyContainingType(fieldSymbol.ContainingType);
             else
                 return fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray))
-                    && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeField"));
+                    && fieldSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "UnityEngine", "SerializeField"))
+                    && VerifyContainingType(fieldSymbol.ContainingType);
         }
 
         private bool VerifySymbolFullName(INamespaceOrTypeSymbol? symbol, params string[] names)
@@ -143,6 +155,21 @@ namespace InspectorOnlyAnalyzer
                 symbol = symbol.ContainingNamespace;
             }
             return symbol?.Name == "";
+        }
+
+        private bool VerifyContainingType(INamedTypeSymbol typeSymbol)
+        {
+            return !typeSymbol.IsAbstract
+                && !typeSymbol.IsStatic
+                && (VerifySymbolFullName(typeSymbol.BaseType, "UnityEngine", "MonoBehaviour")
+                    || typeSymbol.GetAttributes().Any(a => VerifySymbolFullName(a.AttributeClass, "System", "SerializableAttribute"))
+                    || VerifyBaseType(typeSymbol));
+        }
+
+        private bool VerifyBaseType(INamedTypeSymbol typeSymbol)
+        {
+            return VerifySymbolFullName(typeSymbol.BaseType, "UnityEngine", "Object")
+                || typeSymbol.BaseType is not null && VerifyBaseType(typeSymbol.BaseType);
         }
         #endregion
 
@@ -172,6 +199,7 @@ namespace InspectorOnlyAnalyzer
             var hasInspectorOnly = false;
             var hasSerializeField = false;
             var hasNonSerialized = false;
+            var isInvalidContainingType = false;
             foreach (var attribute in fieldSymbol.GetAttributes())
             {
                 if (!hasInspectorOnly && VerifySymbolFullName(attribute.AttributeClass, InspectorOnlyAttributesGenerator.InspectorOnlyAttributeNameArray))
@@ -180,6 +208,8 @@ namespace InspectorOnlyAnalyzer
                     hasSerializeField = true;
                 if (!hasNonSerialized && VerifySymbolFullName(attribute.AttributeClass, nonSerializedAttribute))
                     hasNonSerialized = true;
+                if (!isInvalidContainingType && !VerifyContainingType(fieldSymbol.ContainingType))
+                    isInvalidContainingType = true;
             }
 
             if (!hasInspectorOnly)
@@ -194,6 +224,12 @@ namespace InspectorOnlyAnalyzer
             if (fieldSymbol.DeclaredAccessibility != Accessibility.Public && !hasSerializeField)
             {
                 var diagnostic = Diagnostic.Create(_declareRule, context.Symbol.Locations[0]);
+                context.ReportDiagnostic(diagnostic);
+            }
+
+            if (isInvalidContainingType)
+            {
+                var diagnostic = Diagnostic.Create(_containingTypeRule, context.Symbol.Locations[0]);
                 context.ReportDiagnostic(diagnostic);
             }
         }

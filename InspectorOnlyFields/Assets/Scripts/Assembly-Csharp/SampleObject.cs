@@ -1,4 +1,4 @@
-using InspectorOnlyFields;
+﻿using InspectorOnlyFields;
 using UnityEngine;
 
 public class SampleObject : MonoBehaviour
@@ -16,5 +16,23 @@ public class SampleObject : MonoBehaviour
     void Update()
     {
         
+    }
+}
+
+public class Sample
+{
+    [InspectorOnly]
+    public GameObject GameObject = new GameObject();
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameObject = new GameObject();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }
